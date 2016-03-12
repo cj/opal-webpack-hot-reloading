@@ -1,0 +1,18 @@
+{
+  "name": "opal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {},
+  "devDependencies": {
+    "opalrb-loader": "0.0.3",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
+  },
+    "scripts": {
+    "dev": "webpack-dev-server --config webpack.config.js --host 0.0.0.0 --port 8080 --devtool eval --progress --colors --historyApiFallback true --hot --content-base dist/ --watch --watch-polling"
+  },
+  "author": "cj <email@cj.io> (http://cj.io)",
+  "license": "ISC"
+}

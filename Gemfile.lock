@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    daemons (1.2.3)
+    eventmachine (1.0.9.1)
+    rack (1.6.4)
+    roda (2.11.0)
+      rack
+    thin (1.6.4)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (~> 1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  roda (= 2.11.0)
+  thin (= 1.6.4)
+
+BUNDLED WITH
+   1.11.2
