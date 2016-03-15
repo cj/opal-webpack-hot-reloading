@@ -21,16 +21,6 @@ module Yah
     end
 
     if !development?
-      assets = JSON.parse File.read('./dist/assets.json')
-      precompiled_assets = {}
-      assets['main'].each do |key, value|
-        precompiled_assets[key] = value
-          .sub('main.', '')
-          .gsub(/\.[a-z]{2,3}$/, '')
-      end
-      File.write("#{Dir.pwd}/dist/precompiled.json"\
-                 , precompiled_assets.to_json)
-
       plugin :assets,
         path: "#{Dir.pwd}",
         css_dir: '',

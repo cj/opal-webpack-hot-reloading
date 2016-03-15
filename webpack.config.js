@@ -56,8 +56,8 @@ var config             = {
 
 if (production) {
   config.entry = [
-    './.connect-opal.js',
-    './.connect-entry.js'
+    './.connect/opal.js',
+    './.connect/entry.js'
   ]
   config.plugins = [
     // new webpack.optimize.UglifyJsPlugin({minimize: true}),
@@ -83,7 +83,7 @@ if (production) {
     new CompressionPlugin({
       test: /\.js$|\.css$/,
       // threshold: 10240,
-      minRatio: 'infinity'
+      minRatio: Infinity
     })
   ]
   config.output = {
@@ -96,8 +96,8 @@ if (production) {
   config.entry = [
     'webpack-dev-server/client?http://0.0.0.0:8080', // WebpackDevServer host and port
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-    './.connect-opal.js',
-    './.connect-entry.js'
+    './.connect/opal.js',
+    './.connect/entry.js'
   ]
   config.plugins = [
     // new webpack.HotModuleReplacementPlugin(),

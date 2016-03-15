@@ -1,9 +1,7 @@
 require './app/unreloader'
 
 namespace :webpack do
-  required_files = Opal::Connect.files.map do |file|
-    "require('#{file[1..-1]}')"
-  end.join(';')
+  FileUtils.mkdir_p("#{Dir.pwd}/.connect")
 
   builder = Opal::Builder.new
   build_str = '`require("expose?$!expose?jQuery!jquery")`; require "opal"; require "opal-jquery"; require "opal/connect";'
@@ -11,15 +9,29 @@ namespace :webpack do
   desc "Start webpack"
   task :run do
     builder.build_str(build_str, '(inline)')
-    File.write "#{Dir.pwd}/.connect-opal.js", builder.to_s
+    File.write "#{Dir.pwd}/.connect/opal.js", builder.to_s
 
     exec({"OPAL_LOAD_PATH" => Opal.paths.join(":")}, "webpack-dev-server --progress -d --host 0.0.0.0 --port 8080 --compress --devtool eval --progress --colors --historyApiFallback true --hot --content-base dist/ --watch --watch-polling")
   end
 
   desc "Build webpack"
   task :build do
+      assets = JSON.parse File.read('./dist/assets.json')
+      precompiled_assets = {}
+      assets['main'].each do |key, value|
+        precompiled_assets[key] = value
+          .sub('main.', '')
+          .gsub(/\.[a-z]{2,3}$/, '')
+      end
+
+      File.write("#{Dir.pwd}/dist/precompiled.json"\
+                 , precompiled_assets.to_json)
+
+    required_files = Opal::Connect.files.map do |file|
+      "require('#{file[1..-1]}')"
+    end.join(';')
     builder.build_str( "#{build_str}#{required_files}", '(inline)')
-    File.write "#{Dir.pwd}/.connect-opal.js", builder.to_s
+    File.write "#{Dir.pwd}/.connect/opal.js", builder.to_s
     exec({
       "OPAL_LOAD_PATH" => Opal.paths.join(":"),
       "RACK_ENV" => 'production'
