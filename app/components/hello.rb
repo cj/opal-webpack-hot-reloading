@@ -1,4 +1,5 @@
 require 'app/components/a'
+`require('app/assets/css/style.css')`
 
 module Yah
   module Components

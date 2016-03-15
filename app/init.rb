@@ -9,22 +9,32 @@ module Yah
   class Server < Roda
     use Rack::Session::Cookie, :secret => '123456'
 
-    plugin :assets, js: 'main.js'
+    plugin :environments
 
     Opal::Connect.options do |config|
-      config[:hot_reload] = {
-        host: "http://local.sh",
-        port: 8080
-      }
+      if development?
+        config[:hot_reload] = {
+          host: "http://local.sh",
+          port: 8080
+        }
+      end
+    end
+
+    if !development?
+      # assets = JSON.parse File.read('./build/assets.json')
+      plugin :assets,
+        js: { main: 'somefile' },
+        precompiled: "#{Dir.pwd}/build/assets.json"
     end
 
     route do |r|
-      r.assets
+      r.assets if RACK_ENV != 'development'
 
       # GET / request
       r.root do
         # html = File.read('./index.html')
         # html
+        puts assets(:js)
         'hey'
       end
 
