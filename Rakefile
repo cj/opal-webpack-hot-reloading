@@ -2,6 +2,7 @@ require './app/unreloader'
 
 namespace :webpack do
   FileUtils.mkdir_p("#{Dir.pwd}/.connect")
+  `touch #{Dir.pwd}/.connect/entry.js`
 
   builder = Opal::Builder.new
   build_str = '`require("expose?$!expose?jQuery!jquery")`; require "opal"; require "opal-jquery"; require "opal/connect";'
