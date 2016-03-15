@@ -4,6 +4,7 @@ var webpack            = require('webpack');
 var AssetsPlugin       = require('assets-webpack-plugin');
 var ExtractTextPlugin  = require('extract-text-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var CompressionPlugin  = require("compression-webpack-plugin");
 var production         = process.env.RACK_ENV == 'production';
 var config             = {
   context: __dirname,
@@ -66,7 +67,7 @@ if (production) {
       }
     }),
     new AssetsPlugin({
-      path: path.join(__dirname, 'build'),
+      path: path.join(__dirname, 'dist'),
       prettyPrint: true,
       filename: 'assets.json',
       fullPath: false
@@ -76,13 +77,20 @@ if (production) {
       // verbose: true, 
       // dry: false
     }),
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('main.[hash].css', {
+      allChunks: true
+    }),
+    new CompressionPlugin({
+      test: /\.js$|\.css$/,
+      // threshold: 10240,
+      minRatio: 'infinity'
+    })
   ]
   config.output = {
     // filename: '[name]-[id]-[hash].js',
-    filename: '[name]-[hash].js',
-    publicPath: '/build/',
-    path: path.join(__dirname, './build'),
+    filename: 'main.[hash].js',
+    publicPath: '/dist/',
+    path: path.join(__dirname, './dist'),
   }
 } else {
   config.entry = [

@@ -4,4 +4,4 @@ opalrb-loader
 .bundle
 build
 lib
-.*
+.connect*

@@ -13,7 +13,7 @@ namespace :webpack do
     builder.build_str(build_str, '(inline)')
     File.write "#{Dir.pwd}/.connect-opal.js", builder.to_s
 
-    exec({"OPAL_LOAD_PATH" => Opal.paths.join(":")}, "webpack-dev-server --progress -d --host 0.0.0.0 --port 8080 --devtool eval --progress --colors --historyApiFallback true --hot --content-base dist/ --watch --watch-polling")
+    exec({"OPAL_LOAD_PATH" => Opal.paths.join(":")}, "webpack-dev-server --progress -d --host 0.0.0.0 --port 8080 --compress --devtool eval --progress --colors --historyApiFallback true --hot --content-base dist/ --watch --watch-polling")
   end
 
   desc "Build webpack"

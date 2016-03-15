@@ -21,10 +21,27 @@ module Yah
     end
 
     if !development?
-      # assets = JSON.parse File.read('./build/assets.json')
+      assets = JSON.parse File.read('./dist/assets.json')
+      precompiled_assets = {}
+      assets['main'].each do |key, value|
+        precompiled_assets[key] = value
+          .sub('main.', '')
+          .gsub(/\.[a-z]{2,3}$/, '')
+      end
+      File.write("#{Dir.pwd}/dist/precompiled.json"\
+                 , precompiled_assets.to_json)
+
       plugin :assets,
-        js: { main: 'somefile' },
-        precompiled: "#{Dir.pwd}/build/assets.json"
+        path: "#{Dir.pwd}",
+        css_dir: '',
+        js_dir: '',
+        css: ['main.css'],
+        js: ['main.js'],
+        gzip: true,
+        group_subdirs: false,
+        compiled_name: 'main',
+        compiled_path: "../dist",
+        precompiled: './dist/precompiled.json'
     end
 
     route do |r|
@@ -34,8 +51,7 @@ module Yah
       r.root do
         # html = File.read('./index.html')
         # html
-        puts assets(:js)
-        'hey'
+        "#{assets(:css)}"
       end
 
       r.on 'hello' do
