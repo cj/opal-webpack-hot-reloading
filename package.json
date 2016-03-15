@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
-  "dependencies": {},
+  "dependencies": {
+    "expose-loader": "^0.7.1",
+    "jquery": "^2.2.1"
+  },
   "devDependencies": {
-    "opalrb-loader": "0.0.3",
+    "babel-core": "^6.7.2",
+    "babel-loader": "^6.2.4",
+    "opalrb-loader": "file:opalrb-loader",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.10.0"
-  },
-    "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.js --host 0.0.0.0 --port 8080 --devtool eval --progress --colors --historyApiFallback true --hot --content-base dist/ --watch --watch-polling"
+    "webpack-hot-middleware": "^2.10.0",
+    "webpack-node-externals": "^1.0.0"
   },
   "author": "cj <email@cj.io> (http://cj.io)",
   "license": "ISC"
