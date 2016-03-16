@@ -1,3 +1,4 @@
+Unreloader.require './lib/opal/connect/dom.rb'
 Unreloader.require './lib/opal/connect/html.rb'
 Unreloader.require './lib/opal/connect/cache.rb'
 Unreloader.require './lib/opal/connect.rb'
@@ -37,11 +38,14 @@ module Yah
     route do |r|
       r.assets if RACK_ENV != 'development'
 
+      r.on 'img' do
+        r.run Rack::Directory.new("#{Dir.pwd}/private/Buntington_HTML_pack/Buntington_HTML/img")
+      end
+
       # GET / request
       r.root do
-        # html = File.read('./index.html')
-        # html
-        "#{assets(:css)}"
+        layout = Components::Layout.new
+        layout.to_js :display
       end
 
       r.on 'hello' do

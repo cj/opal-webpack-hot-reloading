@@ -1,9 +1,5 @@
 require 'app/components/a'
 
-if RUBY_ENGINE == 'opal'
-`require('app/assets/css/style.css')`
-end
-
 module Yah
   module Components
     class Hello

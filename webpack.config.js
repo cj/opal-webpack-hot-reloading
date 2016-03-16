@@ -9,6 +9,10 @@ var production         = process.env.RACK_ENV == 'production';
 var config             = {
   context: __dirname,
   resolve: {
+    alias: {
+      app: path.resolve( __dirname, 'app' ),
+      theme: path.resolve( __dirname, 'private', 'Buntington_HTML_pack', 'Buntington_HTML' )
+    },
     root: path.resolve( __dirname ),
     extensions: ['', '.js', '.css', '.rb']
   },
@@ -26,13 +30,15 @@ var config             = {
       },
       {
         test: /\.css$/,
-        // exclude: /node_modules|\.bundle|opalrb-loader/,
-        // loader: ExtractTextPlugin.extract('stylus', 'css-loader!stylus-loader'),
-        // loader: 'css-loader!stylus-loader',
-        // loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
         loader: production ? ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
                            : 'style-loader!css-loader!postcss-loader'
-      }
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'url?limit=10000!img?progressive=true'
+      },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   },
   // packageAlias: false,

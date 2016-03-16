@@ -10,7 +10,7 @@ Bundler.setup :default, RACK_ENV
 
 require 'rack/unreloader'
 # Unreloader = Rack::Unreloader.new{App}
-Unreloader = Rack::Unreloader.new(:subclasses=>%w'Roda Opal Opal::Connect::HTML'){Yah::Server}
+Unreloader = Rack::Unreloader.new(:subclasses=>%w'Roda Opal Opal::Connect::HTML Opal::Connect::Dom'){Yah::Server}
 require 'roda'
 
 require 'oga'
