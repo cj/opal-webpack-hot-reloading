@@ -17,17 +17,6 @@ namespace :webpack do
 
   desc "Build webpack"
   task :build do
-      assets = JSON.parse File.read('./dist/assets.json')
-      precompiled_assets = {}
-      assets['main'].each do |key, value|
-        precompiled_assets[key] = value
-          .sub('main.', '')
-          .gsub(/\.[a-z]{2,3}$/, '')
-      end
-
-      File.write("#{Dir.pwd}/dist/precompiled.json"\
-                 , precompiled_assets.to_json)
-
     required_files = Opal::Connect.files.map do |file|
       "require('#{file[1..-1]}')"
     end.join(';')

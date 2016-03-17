@@ -1,3 +1,3 @@
 require './app/unreloader'
 
-run Unreloader
+run RACK_ENV != 'development' ? Yah::Server : Unreloader

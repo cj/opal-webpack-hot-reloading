@@ -92,8 +92,8 @@ if (production) {
   config.output = {
     // filename: '[name]-[id]-[hash].js',
     filename: 'main.[hash].js',
-    publicPath: '/dist/',
-    path: path.join(__dirname, './dist'),
+    publicPath: '/dist/assets/',
+    path: path.join(__dirname, 'dist', 'assets'),
   }
 } else {
   config.entry = [

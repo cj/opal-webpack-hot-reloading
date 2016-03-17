@@ -1,11 +1,3 @@
-Unreloader.require './lib/opal/connect/dom.rb'
-Unreloader.require './lib/opal/connect/html.rb'
-Unreloader.require './lib/opal/connect/cache.rb'
-Unreloader.require './lib/opal/connect.rb'
-
-glob = './app/{components}/*.rb'
-Dir[glob].each { |file| Unreloader.require file }
-
 module Yah
   class Server < Roda
     use Rack::Session::Cookie, :secret => '123456'
@@ -21,7 +13,14 @@ module Yah
       end
     end
 
-    if !development?
+    headers = {
+      'Cache-Control' => 'public, max-age=2592000, no-transform',
+      'Connection' => 'keep-alive',
+      'Age' => '25637',
+      'Strict-Transport-Security' => 'max-age=315'
+    }
+
+    unless development?
       plugin :assets,
         path: "#{Dir.pwd}",
         css_dir: '',
@@ -29,22 +28,33 @@ module Yah
         css: ['main.css'],
         js: ['main.js'],
         gzip: true,
+        headers: headers,
         group_subdirs: false,
         compiled_name: 'main',
-        compiled_path: "../dist",
+        compiled_path: "../dist/assets",
         precompiled: './dist/precompiled.json'
     end
+
+    plugin :static, ['/img'],
+      root: "#{Dir.pwd}/private/Buntington_HTML_pack/Buntington_HTML",
+      header_rules: [ [:all, headers] ]
+
+    plugin :static, ['/dist'],
+      root: "#{Dir.pwd}",
+      header_rules: [ [:all, headers] ]
 
     route do |r|
       r.assets if RACK_ENV != 'development'
 
-      r.on 'img' do
-        r.run Rack::Directory.new("#{Dir.pwd}/private/Buntington_HTML_pack/Buntington_HTML/img")
+      r.on 'connect' do
+        response['Content-Type'] = 'application/json'
+        params = JSON.parse(request.body.read)
+        Object.const_get(params['klass']).new.__send__(params['method'], *params['args']).to_json
       end
 
       # GET / request
       r.root do
-        layout = Components::Layout.new
+        layout = Components::Layout.new(self)
         layout.to_js :display
       end
 
