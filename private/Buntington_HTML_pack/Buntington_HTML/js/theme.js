@@ -27,7 +27,7 @@
 	CHEF.mobileMenuClone = '';
 	if( $( 'nav#k-menu' ).length ) CHEF.mobileMenuClone = $( 'nav#k-menu' ).clone().attr( 'id', 'navigation-mobile' );
 	CHEF.mobileNav = function() {
-		CHEF.mobileMenuClone.append( 'nav#k-menu' );
+		CHEF.mobileMenuClone.insertAfter( 'nav#k-menu' );
 		if( $( 'nav#navigation-mobile' ).length ) {
 			$( 'nav#navigation-mobile' ).removeClass( 'k-main-navig' );
 			$( 'nav#navigation-mobile > ul' ).removeAttr( 'id' ).removeClass( 'k-dropdown-menu' ).addClass( 'list-unstyled' );

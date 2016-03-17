@@ -19,7 +19,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "img-loader": "^1.2.2",
-    "opalrb-loader": "0.0.3",
+    "opalrb-loader-cj": "0.0.4",
     "postcss": "^5.0.19",
     "postcss-browser-reporter": "^0.4.0",
     "postcss-cssnext": "^2.5.1",
@@ -35,7 +35,8 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0",
-    "webpack-node-externals": "^1.0.0"
+    "webpack-node-externals": "^1.0.0",
+    "webpack-postcss-tools": "^1.1.1"
   },
   "author": "cj <email@cj.io> (http://cj.io)",
   "license": "ISC"

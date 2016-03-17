@@ -1,4 +1,5 @@
 // http://learn.humanjavascript.com/react-ampersand/styles-stylus-and-hot-loading
+// https://github.com/pekim/postcss-modules-resolve-from-alias
 var path               = require("path");
 var webpack            = require('webpack');
 var AssetsPlugin       = require('assets-webpack-plugin');
@@ -13,7 +14,7 @@ var config             = {
       app: path.resolve( __dirname, 'app' ),
       theme: path.resolve( __dirname, 'private', 'Buntington_HTML_pack', 'Buntington_HTML' )
     },
-    root: path.resolve( __dirname ),
+    root: [__dirname],
     extensions: ['', '.js', '.css', '.rb']
   },
   module: {
@@ -21,12 +22,9 @@ var config             = {
       { 
         test: /\.rb$/, 
         exclude: /node_modules|\.bundle/,
-        loader: "opalrb-loader",
+        loader: "opalrb-loader-cj",
         root: path.resolve('./'),
-        query: {
-          "requirable": false,
-          "dynamic_require_severity": "ignore"
-        }
+        query: { "dynamic_require_severity": "ignore" }
       },
       {
         test: /\.css$/,
@@ -47,7 +45,6 @@ var config             = {
   },
   postcss: function (webpack) {
     return [
-      require("postcss-import")({ addDependencyTo: webpack }),
       require("postcss-url")(),
       require("postcss-cssnext")(),
       // add your "plugins" here

@@ -25,7 +25,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 /* ================================================== COMMON STYLES */
 
 /* == font and links == */
-body, html { font-family: 'Open Sans', 'Myriad Pro', 'Helvetica',  sans-serif; font-size: 16px; font-weight: 300; line-height: 26px; color: #777; }
+body { font-family: 'Open Sans', 'Myriad Pro', 'Helvetica',  sans-serif; font-size: 16px; font-weight: 300; line-height: 26px; color: #777; }
 a { -webkit-transition: 0.2s ease-in-out all; -moz-transition: 0.2s ease-in-out all; -o-transition: 0.2s ease-in-out all; transition: 0.2s ease-in-out all; }
 a:link, a:visited { color: #ea5644; text-decoration: none; }
 a:hover, a:focus { color: #111; outline: none; }
@@ -214,12 +214,12 @@ span.alter-menu-icon { display: block; width: 24px; height: 24px; background: ur
 .carousel-indicators li { background-color: #222222\9; background-color: rgba( 0, 0, 0, 0.1 ); } 
 .carousel-indicators .active { opacity: 0.7; }
 .carousel-control.right, .carousel-control.left { background-image: none; background-repeat: inherit; background-color: rgba( 0, 0, 0, 0.7 ); top: 50%; width: 40px; height: 40px; margin-top: -20px; line-height: 40px; }
-/* .carousel-inner > .item { -webkit-transition: 0.3s ease-in-out left; -moz-transition: 0.3s ease-in-out left; -o-transition: 0.3s ease-in-out left; transition: 0.3s ease-in-out left; } */
+.carousel-inner > .item { -webkit-transition: 0.3s ease-in-out left; -moz-transition: 0.3s ease-in-out left; -o-transition: 0.3s ease-in-out left; transition: 0.3s ease-in-out left; }
 .carousel-control { color: #ea5644; }
 .carousel-control.left { left: 40px; }
 .carousel-control.right { right: 40px; }
 .carousel-control.left, 
-.carousel-control.right { opacity: 0; }
+.carousel-control.right { opacity: 0; -webkit-transition: all 100ms ease-out 0s; -moz-transition: all 100ms ease-out 0s; -o-transition: all 100ms ease-out 0s; transition: all 100ms ease-out 0s; }
 .carousel:hover .carousel-control.left  { left: 0; opacity: 1; }
 .carousel:hover .carousel-control.right { right: 0; opacity: 1; }
 .k-carousel-caption { position: absolute; border-top: 3px solid #ea5644; }

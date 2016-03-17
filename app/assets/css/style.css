@@ -1,5 +1,5 @@
-@import "../../../private/Buntington_HTML_pack/Buntington_HTML/font-awesome/css/font-awesome.min.css";
-@import "../../../private/Buntington_HTML_pack/Buntington_HTML/js/dropdown-menu/dropdown-menu.css";
-@import "../../../private/Buntington_HTML_pack/Buntington_HTML/bootstrap/css/bootstrap.min.css";
-@import "../../../private/Buntington_HTML_pack/Buntington_HTML/js/fancybox/jquery.fancybox.css";
-@import "../../../private/Buntington_HTML_pack/Buntington_HTML/style.css";
+@import "~theme/font-awesome/css/font-awesome.min.css";
+@import "~theme/js/dropdown-menu/dropdown-menu.css";
+@import "~theme/bootstrap/css/bootstrap.min.css";
+@import "~theme/js/fancybox/jquery.fancybox.css";
+@import "~theme/style.css";
