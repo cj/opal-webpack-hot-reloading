@@ -4,7 +4,7 @@ module Yah
 
     plugin :environments
 
-    Opal::Connect.options do |config|
+    Opal::Connect.setup do |config|
       if development?
         config[:hot_reload] = {
           host: "http://local.sh",
@@ -25,21 +25,21 @@ module Yah
         path: "#{Dir.pwd}",
         css_dir: '',
         js_dir: '',
-        css: ['main.css'],
-        js: ['main.js'],
+        css: ['never_used_but_needed_by_roda.css'],
+        js: ['never_used_but_needed_by_roda.js'],
         gzip: true,
         headers: headers,
         group_subdirs: false,
         compiled_name: 'main',
-        compiled_path: "../dist/assets",
-        precompiled: './dist/precompiled.json'
+        compiled_path: "../public/assets",
+        precompiled: './public/assets/precompiled.json'
     end
 
     plugin :static, ['/img'],
       root: "#{Dir.pwd}/private/Buntington_HTML_pack/Buntington_HTML",
       header_rules: [ [:all, headers] ]
 
-    plugin :static, ['/dist'],
+    plugin :static, ['/public'],
       root: "#{Dir.pwd}",
       header_rules: [ [:all, headers] ]
 
@@ -56,16 +56,6 @@ module Yah
       r.root do
         layout = Components::Layout.new(self)
         layout.to_js :display
-      end
-
-      r.on 'hello' do
-        hello = Components::Hello.new
-        hello.to_js :world, name: 'cj'
-      end
-
-      r.on 'test' do
-        test = Test.new
-        test.to_js :moo
       end
     end
   end

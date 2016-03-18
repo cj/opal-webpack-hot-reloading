@@ -70,12 +70,12 @@ if (production) {
       }
     }),
     new AssetsPlugin({
-      path: path.join(__dirname, 'dist'),
+      path: path.join(__dirname, 'public', 'assets'),
       prettyPrint: true,
       filename: 'assets.json',
       fullPath: false
     }),
-    new CleanWebpackPlugin(['dist', 'build'], {
+    new CleanWebpackPlugin(['public/assets'], {
       root: __dirname,
       // verbose: true, 
       // dry: false
@@ -92,8 +92,8 @@ if (production) {
   config.output = {
     // filename: '[name]-[id]-[hash].js',
     filename: 'main.[hash].js',
-    publicPath: '/dist/assets/',
-    path: path.join(__dirname, 'dist', 'assets'),
+    publicPath: '/public/assets/',
+    path: path.join(__dirname, 'public', 'assets'),
   }
 } else {
   config.entry = [

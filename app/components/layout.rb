@@ -23,7 +23,7 @@ module Yah
         `require('theme/js/theme.js')`
       end
 
-      connect_server do
+      server do
         def test_method
           {moo: 'cow'}
         end
@@ -57,7 +57,7 @@ module Yah
 
       def display
         if RUBY_ENGINE == 'opal'
-          connect_server(:test_method).then do |response|
+          server(:test_method).then do |response|
             puts response[:moo]
           end
         else
