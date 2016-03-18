@@ -65,6 +65,7 @@ module Yah
           breadcrumbs = Dom[:breadcrumbs]
           slider      = Dom[:slider]
           container   = dom.find('#k-body > .container:first-child')
+
           container.prepend slider
           container.prepend breadcrumbs
 
