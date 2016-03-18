@@ -25,11 +25,11 @@ module Yah
 
       connect_server do
         def test_method
-          'testing'
+          {moo: 'cow'}
         end
       end unless RUBY_ENGINE == 'opal'
 
-      connect_load do
+      setup do
         # Using this as out layout template
         html = File.read './private/Buntington_HTML_pack/Buntington_HTML/index.html'
         # load the html into a dom element
@@ -58,7 +58,7 @@ module Yah
       def display
         if RUBY_ENGINE == 'opal'
           connect_server(:test_method).then do |response|
-            puts response
+            puts response[:moo]
           end
         else
           dom         = Dom['html']

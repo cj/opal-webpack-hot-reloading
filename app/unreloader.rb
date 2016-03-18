@@ -20,6 +20,7 @@ require 'roda'
 require 'oga'
 require 'htmlentities'
 require 'opal'
+require 'opal/connect'
 
 Opal.append_path Dir.pwd
 Opal.append_path "#{Dir.pwd}/lib"
@@ -28,12 +29,6 @@ Opal.use_gem 'opal-jquery'
 if RACK_ENV == 'development'
   require 'pry'
 end
-
-Unreloader.require './lib/opal/connect/dom.rb'
-Unreloader.require './lib/opal/connect/html.rb'
-Unreloader.require './lib/opal/connect/cache.rb'
-Unreloader.require './lib/opal/connect/server.rb'
-Unreloader.require './lib/opal/connect.rb'
 
 glob = './app/{components}/*.rb'
 Dir[glob].each { |file| Unreloader.require file }
