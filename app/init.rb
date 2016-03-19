@@ -37,15 +37,24 @@ module Yah
     route do |r|
       r.assets if RACK_ENV != 'development'
 
-      r.on 'connect' do
-        response['Content-Type'] = 'application/json'
+      r.post 'connect' do
         params = JSON.parse(request.body.read)
-        Object.const_get(params['klass']).new.__send__(params['method'], *params['args']).to_json
+
+        # Make sure they are allowed to call that method
+        if Opal::Connect.server_methods[params['klass']].include?(params['method'].to_sym)
+          response['Content-Type'] = 'application/json'
+          Object.const_get(params['klass'])
+            .new
+            .scope(self)
+            .public_send(params['method'], *params['args']).to_json
+        else
+          response.status = 405
+        end
       end
 
       # GET / request
       r.root do
-        layout = Components::Layout.new(self)
+        layout = Components::Layout.new.scope(self)
         layout.to_js :display
       end
     end

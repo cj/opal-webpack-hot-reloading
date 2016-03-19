@@ -25,7 +25,7 @@ if RACK_ENV == 'development'
 end
 
 Opal::Connect.setup do |config|
-  config[:plugins] = [:server, :html, :dom, :events]
+  config[:plugins] = [:server, :html, :dom, :events, :scope]
 
   if RACK_ENV == 'development'
     config[:hot_reload] = {
@@ -38,8 +38,10 @@ Opal::Connect.setup do |config|
   Dir[glob].each { |file| Unreloader.require file }
 end
 
-if RACK_ENV != 'development'
-  assets             = JSON.parse File.read('./public/assets/assets.json')
+assets_path = './public/assets/assets.json'
+
+if RACK_ENV != 'development' && File.exist?(assets_path)
+  assets             = JSON.parse File.read(assets_path)
   precompiled_assets = {}
 
   assets['main'].each do |key, value|
