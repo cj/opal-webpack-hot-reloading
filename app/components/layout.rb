@@ -33,7 +33,7 @@ module Yah
         # Using this as out layout template
         html = File.read './private/Buntington_HTML_pack/Buntington_HTML/index.html'
         # load the html into a dom element
-        dom = Dom[html]
+        dom.set!(html)
         # remove links and script tags
         dom.find('link, script').remove
         # Set the page title
@@ -43,14 +43,14 @@ module Yah
         # save breadcrumbs as a template
         dom.find('#k-body > .container > .row:first-child')
           .attr('id', 'breadcrumbs')
-          .save :breadcrumbs
+          .save! :breadcrumbs
         # save slider
         slider = dom.find('#k-body > .container > .row:first-child')
           .attr('id', 'silder')
         # remove all but one item in the slider
         slider.find('.item:not(:first-child)').remove
         slider.find('#carousel-featured li:not(:first-child)').remove
-        slider.save :slider
+        slider.save! :slider
         # save it in the connect cache
         dom.save!
       end unless RUBY_ENGINE == 'opal'
@@ -60,10 +60,11 @@ module Yah
           server(:test_method).then do |response|
             puts response[:moo]
           end
+
+          puts dom.tmpl(:breadcrumbs)
         else
-          dom         = Dom['html']
-          breadcrumbs = Dom[:breadcrumbs]
-          slider      = Dom[:slider]
+          breadcrumbs = dom.tmpl(:breadcrumbs)
+          slider      = dom.tmpl(:slider)
           container   = dom.find('#k-body > .container:first-child')
 
           container.prepend slider

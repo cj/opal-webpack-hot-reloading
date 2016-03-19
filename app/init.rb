@@ -4,15 +4,6 @@ module Yah
 
     plugin :environments
 
-    Opal::Connect.setup do |config|
-      if development?
-        config[:hot_reload] = {
-          host: "http://local.sh",
-          port: 8080
-        }
-      end
-    end
-
     headers = {
       'Cache-Control' => 'public, max-age=2592000, no-transform',
       'Connection' => 'keep-alive',

@@ -7,16 +7,12 @@ RACK_ENV = ENV.fetch('RACK_ENV') { 'development' }
 Bundler.setup :default, RACK_ENV
 
 require 'rack/unreloader'
-# Unreloader = Rack::Unreloader.new{App}
 Unreloader = Rack::Unreloader.new(
   reload: RACK_ENV == 'development',
   subclasses: %w'Roda'
 ){Yah::Server}
 
 require 'roda'
-
-require 'oga'
-require 'htmlentities'
 require 'opal'
 require 'opal/connect'
 
@@ -28,8 +24,19 @@ if RACK_ENV == 'development'
   require 'pry'
 end
 
-glob = './app/{components}/*.rb'
-Dir[glob].each { |file| Unreloader.require file }
+Opal::Connect.setup do |config|
+  config[:plugins] = [:server, :html, :dom, :events]
+
+  if RACK_ENV == 'development'
+    config[:hot_reload] = {
+      host: "http://local.sh",
+      port: 8080,
+    }
+  end
+
+  glob = './app/{components}/*.rb'
+  Dir[glob].each { |file| Unreloader.require file }
+end
 
 if RACK_ENV != 'development'
   assets             = JSON.parse File.read('./public/assets/assets.json')

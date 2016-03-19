@@ -5,3 +5,5 @@ opalrb-loader
 build
 lib
 .connect*
+backup
+public/assets

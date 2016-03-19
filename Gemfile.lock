@@ -15,10 +15,7 @@ GEM
     concurrent-ruby (1.0.1)
     daemons (1.2.3)
     eventmachine (1.0.9.1)
-    foreman (0.78.0)
-      thor (~> 0.19.1)
     hike (1.2.3)
-    htmlentities (4.3.3)
     method_source (0.8.2)
     oga (2.2)
       ast
@@ -50,16 +47,12 @@ GEM
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
       rack (~> 1.0)
-    thor (0.19.1)
     tilt (2.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  foreman
-  htmlentities (= 4.3.3)
-  oga (= 2.2)
   opal (= 0.9.2)
   opal-connect (= 0.0.1)!
   opal-jquery (= 0.4.1)
