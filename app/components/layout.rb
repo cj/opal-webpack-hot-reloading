@@ -51,8 +51,19 @@ module Yah
         slider.find('.item:not(:first-child)').remove
         slider.find('#carousel-featured li:not(:first-child)').remove
         slider.save! :slider
+        # layout-content
+        dom.find('#k-body > .container > .row:first-child')
+          .attr('id', 'layout-content')
+          .save! :layout_content
         # save it in the connect cache
         dom.save!
+
+        # 404 template
+        dom.set! File.read './private/Buntington_HTML_pack/Buntington_HTML/404.html'
+
+        dom.find('.container > .row:nth-child(2)')
+           .attr('id', 'not_found')
+           .save! :not_found
       end unless RUBY_ENGINE == 'opal'
 
       def display
@@ -60,15 +71,18 @@ module Yah
           server(:test_method).then do |response|
             puts response[:moo]
           end
-
-          puts dom.tmpl(:breadcrumbs)
         else
           breadcrumbs = dom.tmpl(:breadcrumbs)
-          slider      = dom.tmpl(:slider)
           container   = dom.find('#k-body > .container:first-child')
 
-          container.prepend slider
-          container.prepend breadcrumbs
+          container.append breadcrumbs
+
+          unless block_given?
+            slider = dom.tmpl(:slider)
+            container.append slider
+          end
+
+          container.append(yield) if block_given?
 
           unless RACK_ENV == 'development'
             dom.find('head').append roda.assets(:css)
@@ -77,6 +91,10 @@ module Yah
 
           dom.to_s
         end
+      end
+
+      def not_found
+        display { dom.tmpl(:not_found) }
       end
     end
   end

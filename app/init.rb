@@ -34,6 +34,10 @@ module Yah
       root: "#{Dir.pwd}",
       header_rules: [ [:all, headers] ]
 
+    plugin :not_found do
+      Components::Layout.new.to_js :not_found
+    end
+
     route do |r|
       r.assets if RACK_ENV != 'development'
 
