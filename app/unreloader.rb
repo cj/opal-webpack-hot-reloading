@@ -1,6 +1,8 @@
 # need to figure out how to make the opalrb compiler work with require_relative
 $:.unshift(Dir.pwd)
 
+require 'app/config/variables'
+
 require 'bundler'
 
 RACK_ENV = ENV.fetch('RACK_ENV') { 'development' }

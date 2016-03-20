@@ -7,3 +7,9 @@ lib
 .connect*
 backup
 public/assets
+.env*
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
