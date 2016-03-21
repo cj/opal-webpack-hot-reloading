@@ -63,7 +63,12 @@ if (production) {
     './.connect/entry.js'
   ]
   config.plugins = [
-    // new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -87,7 +92,7 @@ if (production) {
       test: /\.js$|\.css$/,
       // threshold: 10240,
       minRatio: Infinity
-    })
+    }),
   ]
   config.output = {
     // filename: '[name]-[id]-[hash].js',
@@ -112,7 +117,8 @@ if (production) {
     publicPath: 'http://local.sh:8080/',
     path: path.join(__dirname),
   }
-  config.devtool = 'sourcemap'
+  // config.devtool = 'source-map'
+  config.devtool = '#inline-source-map'
 }
 
 // http://moduscreate.com/optimizing-react-es6-webpack-production-build/

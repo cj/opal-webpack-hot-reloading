@@ -1,7 +1,7 @@
 ;( function( $ ) {
 	
 	"use strict";
-	var CHEF = window.CHEF || {};
+	var CHEF = (window.CHEF = {});
 	
 	/* ---------- INIT MAIN NAVIG ---------- */
 	CHEF.initMainMenu = function() {

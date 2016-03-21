@@ -8,7 +8,8 @@ module Yah
       'Cache-Control' => 'public, max-age=2592000, no-transform',
       'Connection' => 'keep-alive',
       'Age' => '25637',
-      'Strict-Transport-Security' => 'max-age=315'
+      'Strict-Transport-Security' => 'max-age=315',
+      'Vary' => 'Accept-Encoding'
     }
 
     unless development?
@@ -35,11 +36,13 @@ module Yah
       header_rules: [ [:all, headers] ]
 
     plugin :not_found do
-      Components::Layout.new.to_js :not_found
+      Components::Layout.scope(self).render :not_found
     end
 
     route do |r|
       r.assets if RACK_ENV != 'development'
+
+      r.response.headers['Vary'] ='Accept-Encoding'
 
       r.post 'connect' do
         params = JSON.parse(request.body.read)
@@ -47,8 +50,8 @@ module Yah
         # Make sure they are allowed to call that method
         if Opal::Connect.server_methods[params['klass']].include?(params['method'].to_sym)
           response['Content-Type'] = 'application/json'
+
           Object.const_get(params['klass'])
-            .new
             .scope(self)
             .public_send(params['method'], *params['args']).to_json
         else
@@ -58,8 +61,25 @@ module Yah
 
       # GET / request
       r.root do
-        layout = Components::Layout.new.scope(self)
-        layout.to_js :display
+        layout = Components::Layout.scope(self)
+
+        # pjax request
+        if request.env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
+          layout.display
+        else
+          layout.render :display
+        end
+      end
+
+      r.on 'news' do
+        news = Components::News.scope(self)
+
+        # pjax request
+        if request.env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
+          news.display
+        else
+          news.render :display
+        end
       end
     end
   end

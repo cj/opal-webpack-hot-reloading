@@ -8,6 +8,8 @@ lib
 backup
 public/assets
 .env*
+.azk
+Azkfile.js
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

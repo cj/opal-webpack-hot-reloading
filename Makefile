@@ -9,11 +9,11 @@ install:
 	touch .env.production
 
 run:
-	bundle exec rake webpack:run& bundle exec thin start --port 3000
+	bundle exec rake webpack:run& bundle exec puma -C app/config/puma.rb
 
 build:
 	RACK_ENV=production bundle exec rake webpack:build
 
 run_production:
 	RACK_ENV=production bundle exec rake webpack:build
-	RACK_ENV=production bundle exec thin start --port 3000
+	RACK_ENV=production bundle exec puma -C app/config/puma.rb

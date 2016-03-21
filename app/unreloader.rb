@@ -27,7 +27,8 @@ if RACK_ENV == 'development'
 end
 
 Opal::Connect.setup do |config|
-  config[:plugins] = [:server, :html, :dom, :events, :scope]
+  config[:plugins_path] = 'app/plugins'
+  config[:plugins]      = [:server, :html, :dom, :events, :scope, :assets, :pjax]
 
   if RACK_ENV == 'development'
     config[:hot_reload] = {
@@ -35,10 +36,10 @@ Opal::Connect.setup do |config|
       port: 8080,
     }
   end
-
-  glob = './app/{components}/*.rb'
-  Dir[glob].each { |file| Unreloader.require file }
 end
+
+glob = './app/{components}/**/*.rb'
+Dir[glob].each { |file| Unreloader.require file }
 
 assets_path = './public/assets/assets.json'
 
