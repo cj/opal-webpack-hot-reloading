@@ -23,7 +23,7 @@ Opal.use_gem 'opal-jquery'
 Opal.use_gem 'opal-connect'
 
 if RACK_ENV == 'development'
-  require 'byebug'
+  require 'pry'
 end
 
 Opal::Connect.setup do |config|
