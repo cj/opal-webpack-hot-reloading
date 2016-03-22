@@ -2,6 +2,7 @@ ruby '2.3.0'
 
 source 'https://rubygems.org'
 
+gem 'rake'
 gem 'roda', '2.11.0'
 gem 'rack-unreloader', '1.5.0'
 gem 'puma', '3.2.0'
