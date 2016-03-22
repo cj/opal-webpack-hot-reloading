@@ -1,1 +1,1 @@
-web: mwallasch/docker-ruby-node
+web: bundle exec puma -C app/config/puma.rb

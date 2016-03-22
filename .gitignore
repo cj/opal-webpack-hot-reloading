@@ -10,6 +10,10 @@ public/assets
 .env*
 .azk
 Azkfile.js
+app.json
+config/
+docker-compose.override.yml
+init.sh
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
