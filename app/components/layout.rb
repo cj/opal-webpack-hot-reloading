@@ -22,7 +22,7 @@ module Yah
         # Set the page title
         dom.find('title').text "Young Actor's House"
         # add in google fonts
-        dom.find('head').append '<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700,800" rel="stylesheet" type="text/css">'
+        dom.find('head').append '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700,800" rel="stylesheet" type="text/css">'
 
         create_templates :breadcrumbs, :slider, :news, :logo, :not_found, menu: [
           { name: 'News', title: 'Latest News', href: '/news' },
