@@ -1,1 +1,1 @@
-web: bundle exec puma -C app/config/puma.rb
+web: make run_production
