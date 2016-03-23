@@ -19,7 +19,6 @@ build:
 	RACK_ENV=production bundle exec rake webpack:build
 
 run_production:
-	RACK_ENV=production npm install
 	RACK_ENV=production bundle exec rake webpack:build
 	RACK_ENV=production bundle exec puma -C app/config/puma.rb
 
