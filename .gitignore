@@ -11,9 +11,9 @@ public/assets
 .azk
 Azkfile.js
 app.json
-config/
 docker-compose.override.yml
 init.sh
+young-actors-house.zip
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

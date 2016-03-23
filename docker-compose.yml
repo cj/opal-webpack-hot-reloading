@@ -1,5 +1,4 @@
 web:
   build: "."
-  command: 'make run_production'
   env_file:
     - .env
