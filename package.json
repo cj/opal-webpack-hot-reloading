@@ -39,6 +39,9 @@
     "webpack-node-externals": "^1.0.0",
     "webpack-postcss-tools": "^1.1.1"
   },
+  "scripts": {
+    "postinstall": "make build"
+  },
   "author": "cj <email@cj.io> (http://cj.io)",
   "license": "ISC"
 }
