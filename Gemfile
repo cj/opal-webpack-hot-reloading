@@ -9,5 +9,8 @@ gem 'puma', '3.2.0'
 gem 'opal', '0.9.2'
 gem 'opal-jquery', '0.4.1'
 gem 'opal-connect', '0.0.3' #, path: '~/gems/opal-connect'
-gem 'eb_deployer'
-gem 'pry'
+gem "hirefire-resource"
+
+group :development, :test do
+  gem 'pry'
+end

@@ -4,6 +4,11 @@ module Yah
 
     plugin :environments
 
+    if production?
+      require 'hirefire-resource'
+      use HireFire::Middleware
+    end
+
     headers = {
       'Cache-Control' => 'public, max-age=2592000, no-transform',
       'Connection' => 'keep-alive',
