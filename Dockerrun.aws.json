@@ -1,6 +1,18 @@
 {
-    "Image": {
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
     "Name": "ceej/rbenv_node:latest",
     "Update": "true"
-  }
+  },
+    "Ports": [
+    {
+      "ContainerPort": "3000"
+    }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "./",
+      "ContainerDirectory": "/app"
+    }
+  ]
 }
