@@ -1,0 +1,6 @@
+{
+    "Image": {
+    "Name": "ceej/rbenv_node:latest",
+    "Update": "true"
+  }
+}

@@ -77,7 +77,7 @@ common:
   # The simplest one that just be checking server landing page using curl, e.g.
   smoke_test: |
     curl_http_code = "curl -s -o /dev/null -w \"%{http_code}\" http://#{host_name}"
-    Timeout.timeout(600) do
+    Timeout.timeout(1200) do
       until ['200', '301', '302'].include?(`#{curl_http_code}`.strip)
         sleep 5
       end
